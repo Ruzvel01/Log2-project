@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*,
+::after
+::before{
+    box-sizing: border-box;
+}
+body{
+    font: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    opacity: 1;
+    overflow-y: scroll;
+    margin: 0;
+}
+a{
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+li{
+    list-style: none;
+}
+.wrapper{
+    align-items: stretch;
+    display: flex;
+    width: 100%;
+}
+#sidebar{
+    max-width: 264px;
+    min-width: 264px;
+    background: var(--bs-dark);
+    transition: all 0.35s ease-in-out;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 0;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+    width: 100%;
+    background: white;
+
+}
+
+.sidebar-logo{
+    padding: 1.5rem;
+  
+}
+.sidebar-logo a{
+    color: #e9ecef;
+    font-size: 600;
+    font-weight: 600;
+    text-decoration: none;
+}
+.sidebar-nav{
+    flex-grow: 1;
+    list-style: none !important;
+    margin-bottom: 0;
+    padding-left: 0;
+    margin-left: 0;
+}
+.sidebar-header{
+    color: #e9ecef;
+    font-size: .75rem;
+    padding: 1.5rem 1.5rem .375rem;
+}
+a.sidebar-link{
+    padding: .625rem 1.625rem !important;
+    color: #e9ecef !important;
+    position: relative !important;
+    display: block;
+    font-size: 0.875rem !important;
+}

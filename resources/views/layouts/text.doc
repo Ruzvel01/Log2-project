@@ -1,0 +1,10 @@
+@if(session('success'))
+<div class="toast toast-success show">
+    <span>{{ session('success') }}</span>
+</div>
+@endif
+
+<form action="{{ route('logout') }}" method="POST">
+    @csrf
+    <button type="submit">Logout</button>
+</form>
