@@ -13,7 +13,7 @@
 
       <ul class="sidebar-list">
         <li class="sidebar-list-item dash">
-          <a href="#" target="_blank">
+          <a href="{{route('dashboard')}}">
             <i class='bx bxs-dashboard '></i> Dashboard
           </a>
         </li>
@@ -27,30 +27,30 @@
   </a>
 
   <ul class="sidebar-submenu">
-    <li><a href="#">Vehicle List</a></li>
-    <li><a href="#">Vehicle Status</a></li>
+    <li><a href="{{route('vehicleslist.index')}}">Vehicle List</a></li>
+    <li><a href="{{route('vehiclestatus.index')}}">Vehicle Status</a></li>
     <li><a href="#">Pendings</a></li>
   </ul>
 </li>
 
         <li class="sidebar-list-item">
-          <a href="#" target="_blank">
+          <a href="#" >
            <i class='bx bxs-checkbox-minus'></i>Availability
           </a>
         </li>
         <p class="module-title">Vehicle Management</p>
         <li class="sidebar-list-item">
-          <a href="#" target="_blank">
+          <a href="#" >
          <i class='bx bxs-checkbox-minus'></i>performance
           </a>
         </li>
         <li class="sidebar-list-item">
-          <a href="#" target="_blank">
+          <a href="#">
            <i class='bx bxs-checkbox-minus'></i>dispatch
           </a>
         </li>
         <li class="sidebar-list-item">
-          <a href="#" target="_blank">
+          <a href="#" >
            <i class='bx bxs-checkbox-minus'></i>reservation
           </a>
         </li>
@@ -75,9 +75,9 @@
 
     <div class="profile-info">
       <!-- Display the authenticated user's name -->
-      <span class="profile-name" >{{ Auth::check() ? Auth::user()->username : 'Guest' }}</span>
+      <span class="profile-name" >{{ Auth::check() ? Auth::user()->email : 'Guest' }}</span>
       <!-- Optionally display role -->
-      <span class="profile-role">{{ Auth::check() ? (Auth::user()->role ?? 'User') : 'Guest' }}</span>
+      <span class="profile-role">{{ Auth::check() ? (Auth::user()->role ?? 'Admin') : 'Guest' }}</span>
     </div>
 
     @auth

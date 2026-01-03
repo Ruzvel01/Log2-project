@@ -1,5 +1,4 @@
 // SIDEBAR TOGGLE
-
 let sidebarOpen = false;
 const sidebar = document.getElementById('sidebar');
 
@@ -16,39 +15,83 @@ function closeSidebar() {
     sidebarOpen = false;
   }
 }
-// Select all dropdown toggles
-const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 
-dropdownToggles.forEach(toggle => {
-  toggle.addEventListener('click', (e) => {
-    e.preventDefault();
+document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+    toggle.addEventListener('click', e => {
+        e.preventDefault();
+        const submenu = toggle.parentElement.querySelector('.sidebar-submenu');
 
-    const submenu = toggle.nextElementSibling;
-    const arrow = toggle.querySelector('.arrow');
+        toggle.classList.toggle('active');
+        if (submenu) {
+            submenu.style.display =
+                submenu.style.display === 'block' ? 'none' : 'block';
+        }
 
-    // Toggle submenu visibility
-    if (submenu.style.display === 'block') {
-      submenu.style.display = 'none';
-      toggle.classList.remove('active');
-    } else {
-      submenu.style.display = 'block';
-      toggle.classList.add('active');
-    }
-  });
+        // ✅ realtime breadcrumb for MANAGEMENT / SETTINGS
+        const breadcrumb = document.getElementById('breadcrumb');
+        if (breadcrumb) {
+            breadcrumb.innerHTML = `
+                <span>Dashboard</span>
+                <span>${toggle.textContent.trim()}</span>
+            `;
+        }
+    });
 });
 
 
+
 document.addEventListener("DOMContentLoaded", () => {
-    const toasts = document.querySelectorAll('.toast');
+    const currentUrl = window.location.href;
 
-    toasts.forEach(toast => {
-        // Add 'show' to slide down
-        toast.classList.add('show');
+    document.querySelectorAll('.sidebar-submenu a').forEach(link => {
+        if (currentUrl.includes(link.getAttribute('href'))) {
 
-        // Remove 'show' and add 'hide' after 3 seconds to slide up
-        setTimeout(() => {
-            toast.classList.remove('show');
-            toast.classList.add('hide');
-        }, 3000);
+            const submenu = link.closest('.sidebar-submenu');
+            const toggle = submenu.previousElementSibling;
+
+            // open submenu
+            submenu.style.display = 'block';
+
+            // rotate arrow
+            toggle.classList.add('active');
+
+            // optional active style
+            link.classList.add('active');
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const breadcrumb = document.getElementById('breadcrumb');
+    if (!breadcrumb) return;
+
+    const currentUrl = window.location.href;
+
+    // submenu breadcrumb on page load
+    document.querySelectorAll('.sidebar-submenu a').forEach(link => {
+        if (currentUrl.includes(link.getAttribute('href'))) {
+
+            const submenu = link.closest('.sidebar-submenu');
+            const parentToggle = submenu.previousElementSibling;
+
+            const parentText = parentToggle.textContent.replace(/\s+/g, ' ').trim();
+            const itemText = link.textContent.trim();
+
+            breadcrumb.innerHTML = `
+                <span>Dashboard</span>
+                <span>${parentText}</span>
+                <span>${itemText}</span>
+            `;
+        }
+    });
+
+    // fallback main links
+    document.querySelectorAll('.sidebar-list-item > a:not(.dropdown-toggle)').forEach(link => {
+        if (currentUrl.includes(link.getAttribute('href'))) {
+            breadcrumb.innerHTML = `
+                <span>Dashboard</span>
+                <span>${link.textContent.trim()}</span>
+            `;
+        }
     });
 });

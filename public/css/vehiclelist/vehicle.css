@@ -1,0 +1,120 @@
+  .card {
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        border: none;
+        overflow: hidden;
+    }
+
+    /* Table Styling */
+    .table {
+        border-radius: 12px;
+        overflow: hidden;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 0.95rem;
+    }
+    .table thead {
+        background-color: #f1f3f5;
+    }
+    .table tbody tr:hover {
+        background-color: #f9f9f9;
+        transition: background-color 0.3s;
+    }
+
+    /* Status Row Backgrounds */
+    .status-pending {
+        background-color: #fff8e1 !important;
+    }
+    .status-approved {
+        background-color: #e6f4ea !important;
+    }
+    .status-rejected {
+        background-color: #fdecea !important;
+    }
+
+    /* Status badges */
+    .badge {
+        font-size: 0.85rem;
+        padding: 0.35em 0.75em;
+        border-radius: 0.5rem;
+        font-weight: 500;
+    }
+    .badge.bg-warning { background-color: #fff3cd; color: #856404; }
+    .badge.bg-success { background-color: #d4edda; color: #155724; }
+    .badge.bg-danger { background-color: #f8d7da; color: #721c24; }
+
+    /* Buttons */
+    .btn-sm {
+        padding: 0.35rem 0.75rem;
+        font-size: 0.85rem;
+        border-radius: 6px;
+        transition: all 0.2s;
+    }
+    .btn-sm:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    /* Responsive Table */
+    @media (max-width: 768px) {
+        .table thead {
+            display: none;
+        }
+        .table, .table tbody, .table tr, .table td {
+            display: block;
+            width: 100%;
+        }
+        .table tr {
+            margin-bottom: 1rem;
+        }
+        .table td {
+            text-align: right;
+            padding-left: 50%;
+            position: relative;
+        }
+        .table td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 15px;
+            width: 45%;
+            text-align: left;
+            font-weight: 600;
+        }
+    }
+
+    /*Alert*/
+    .alert-success-custom {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #16a34a; /* green */
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 9999;
+    animation: slideIn 0.4s ease;
+}
+
+.alert-success-custom button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

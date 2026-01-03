@@ -12,14 +12,13 @@ i {
   line-height: 1px;
   font-size: 20px;
 }
-
 .grid-container {
   display: grid;
-  grid-template-columns: 260px 1fr 1fr 1fr;
-  grid-template-rows: 0.2fr 3fr;
+  grid-template-columns: 260px 1fr; 
+  grid-template-rows: 70px 1fr;
   grid-template-areas:
-    'sidebar header header header'
-    'sidebar main main main';
+    'sidebar header'
+    'sidebar main';
   height: 100vh;
 }
 
@@ -31,7 +30,7 @@ i {
   align-items: center;
   justify-content: space-between;
   padding: 0 30px 0 30px;
-  box-shadow: 0 6px 7px -3px rgba(0, 0, 0, 0.35);
+
 }
 .header-left,
 .header-right {
@@ -117,25 +116,31 @@ i {
     gap: 10px; /* space between icon and text */
   
 }
-
+.sidebar-list-item a.active {
+    color: #fff;
+    font-weight: bold;
+}
 .sidebar-list-item:hover {
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
 }
 
 .sidebar-list-item > a {
+  display: flex;
+  align-items: center;
+  gap: 12px;          /* 👈 space sa pagitan ng icon at text */
   text-decoration: none;
   color: #000;
-
 }
-.sidebar-list-item > a .material-icons-outlined{
- margin-right: 12px;
 
-}
 .sidebar-responsive {
   transform: translateX(0);
 }
 /* ---------- SUBMENU DESIGN ---------- */
+.dropdown-toggle::after {
+    display: none !important;
+    content: none !important;
+}
 
 .sidebar-submenu {
   display: none;
@@ -155,7 +160,10 @@ i {
   height: 100%;
   background: rgba(0, 0, 0, 0.25);
 }
-
+.sidebar-submenu a.active {
+    background-color: rgba(255, 255, 255, 0.35);
+    font-weight: 600;
+}
 .sidebar-submenu li {
   position: relative;
 }
@@ -176,6 +184,7 @@ i {
   font-size: 14px;
   color: #000;
   text-decoration: none;
+ 
   display: block;
   padding: 8px 12px;
   border-radius: 6px;
@@ -198,7 +207,7 @@ i {
   padding: 12px 14px;
   border: 1px solid rgba(0, 0, 0, 0.25);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(66, 57, 57, 0.25);
 }
 
 .profile-avatar {
@@ -300,6 +309,30 @@ i {
 .toast.hide {
     transform: translateX(-50%) translateY(-100px); /* move up out of view */
     opacity: 0;
+}
+.main-container {
+  grid-area: main; 
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+  
+.breadcrumb {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.breadcrumb span {
+  color: #555555;
+}
+
+.breadcrumb span + span::before {
+  content: " / ";
+  margin: 0 5px;
+  color: #999;
 }
 
 .close-icon {

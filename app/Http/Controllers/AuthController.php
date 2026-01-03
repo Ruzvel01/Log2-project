@@ -42,7 +42,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/log2home')
+            return redirect()->intended('/dashboard')
             ->with('success', 'Logged in Successfully!');
         }
              return redirect()->back()->with('error', 'Incorrect username or password.');
