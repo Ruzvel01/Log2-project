@@ -62,36 +62,36 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    const breadcrumb = document.getElementById('breadcrumb');
-    if (!breadcrumb) return;
-
     const currentUrl = window.location.href;
+    const breadcrumb = document.getElementById('breadcrumb');
 
-    // submenu breadcrumb on page load
+    // 1. Awtomatikong buksan ang Sidebar Dropdown base sa URL
     document.querySelectorAll('.sidebar-submenu a').forEach(link => {
         if (currentUrl.includes(link.getAttribute('href'))) {
-
             const submenu = link.closest('.sidebar-submenu');
             const parentToggle = submenu.previousElementSibling;
 
-            const parentText = parentToggle.textContent.replace(/\s+/g, ' ').trim();
-            const itemText = link.textContent.trim();
+            // Panatilihing nakabukas ang menu
+            submenu.style.display = 'block';
+            parentToggle.classList.add('active');
+            link.classList.add('active'); // highlight ang current page link
 
-            breadcrumb.innerHTML = `
-                <span>Dashboard</span>
-                <span>${parentText}</span>
-                <span>${itemText}</span>
-            `;
+            // 2. Ayusin ang Breadcrumbs base sa active link
+            if (breadcrumb) {
+                const parentText = parentToggle.textContent.trim();
+                const itemText = link.textContent.trim();
+                breadcrumb.innerHTML = `
+                    <span>Dashboard</span>
+                    <i class='bx bx-chevron-right'></i>
+                    <span>${parentText}</span>
+                    <i class='bx bx-chevron-right'></i>
+                    <span>${itemText}</span>
+                `;
+            }
         }
     });
 
-    // fallback main links
-    document.querySelectorAll('.sidebar-list-item > a:not(.dropdown-toggle)').forEach(link => {
-        if (currentUrl.includes(link.getAttribute('href'))) {
-            breadcrumb.innerHTML = `
-                <span>Dashboard</span>
-                <span>${link.textContent.trim()}</span>
-            `;
-        }
-    });
+    // 3. Siguraduhin na ang Filter form ay nagpapasa ng tab preference (Optional)
+    // Para mas accurate, pwede mong dagdagan ng hidden input ang filter form mo:
+    // <input type="hidden" name="active_tab" value="requests">
 });

@@ -19,7 +19,8 @@ i {
   grid-template-areas:
     'sidebar header'
     'sidebar main';
-  height: 100vh;
+  height: 100vh; /* Fixes the container to the screen height */
+  overflow: hidden; /* Prevents the whole page from scrolling */
 }
 
 /* ---------- HEADER ---------- */
@@ -50,16 +51,15 @@ i {
 /* ---------- SIDEBAR ---------- */
 
 #sidebar {
-     display: flex;
-  flex-direction: column;
-  grid-area: sidebar;
-  height: 100%;
-  background-color: #7494ec;
-  overflow-y: auto;
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column; /* Vertical stack: Brand, List, Profile */
+    height: 100vh;
+    background-color: #7494ec;
+    transition: all 0.5s;
+    z-index: 10;
+    overflow: hidden; /* Pinipigilan ang main sidebar na mag-scroll */
 }
-
 .sidebar-title {
   display: flex;
   align-items: center;
@@ -103,12 +103,20 @@ i {
 
 
 .sidebar-list {
-      flex: 1;
-  padding: 0;
-  margin-top: 15px;
-  list-style-type: none;
+    flex: 1; /* Kakainin nito lahat ng space sa gitna */
+    overflow-y: auto; /* Dito lang lalabas ang scrollbar kung marami nang menu */
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    scrollbar-width: thin; /* Para sa Firefox */
 }
-
+.sidebar-list::-webkit-scrollbar {
+    width: 6px;
+}
+.sidebar-list::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
 .sidebar-list-item {
   padding: 12px 20px;
   font-size: 15px;
@@ -197,17 +205,25 @@ i {
     background-color: rgba(255, 255, 255, 0.2);
 }
 .sidebar-profile {
-  padding: 15px;
+    padding: 15px;
+    background-color: #7494ec; 
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    /* Hindi ito aalis sa baba kahit mag-scroll ang listahan */
 }
 
 .profile-box {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  border-radius: 12px;
-  background: rgba(66, 57, 57, 0.25);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: #fff;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .profile-avatar {
@@ -226,12 +242,16 @@ i {
   display: flex;
   flex-direction: column;
   line-height: 1.2;
+  overflow: hidden; /* Para kung mahaba ang email, hindi sisirain ang box */
 }
 
 .profile-name {
-  font-size: 14px;
+  font-size: 13px; /* Binabaan ko ng 1px para sa mahahabang email */
   font-weight: 600;
   border-bottom: #000 solid 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Lalagyan ng "..." kung sobrang haba ng email */
 }
 
 .profile-role {
@@ -315,7 +335,8 @@ i {
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow-y: auto; /* Dito mag-i-scroll ang content ng page mo */
+  height: calc(100vh - 70px); /* Bawas ang height ng header */
 }
   
 .breadcrumb {

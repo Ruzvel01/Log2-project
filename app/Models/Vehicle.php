@@ -11,9 +11,15 @@ class Vehicle extends Model
     use HasFactory;
 
     protected $fillable = [
-        'plate_no',
-        'model',
-        'type',
-        'status',
+      'plate_no',
+    'model',
+    'type',
+    'status',
+    'engine_no',
+    'chassis_no',
+    'color',
+    'fuel_type',
+    'transmission',
+    'registration_expiry',
     ];
 }

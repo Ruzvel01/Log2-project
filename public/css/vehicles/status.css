@@ -1,0 +1,57 @@
+.status-badge-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        border: 1px solid;
+        background-color: transparent;
+        text-transform: uppercase;
+    }
+
+    .status-badge-pill::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    /* Available Color */
+    .badge-available {
+        color: #198754;
+        border-color: #d1e7dd;
+        background-color: #e8f5e9;
+    }
+    .badge-available::before { background-color: #198754; }
+
+    /* In-Use Color */
+    .badge-inuse {
+        color: #0d6efd;
+        border-color: #cfe2ff;
+        background-color: #f0f7ff;
+    }
+    .badge-inuse::before { background-color: #0d6efd; }
+
+    /* Maintenance Color */
+    .badge-maintenance {
+        color: #dc3545;
+        border-color: #f8d7da;
+        background-color: #fff5f5;
+    }
+    .badge-maintenance::before { background-color: #dc3545; }
+
+    /* 2. Card Borders (Yung Dashboard Cards sa taas) */
+    .status-card {
+        border: none;
+        border-top: 4px solid #6c757d; /* Default */
+        transition: transform 0.2s;
+    }
+    .status-card:hover { transform: translateY(-5px); }
+    
+    .border-total { border-top-color: #343a40 !important; }
+    .border-available { border-top-color: #198754 !important; }
+    .border-inuse { border-top-color: #0d6efd !important; }
+    .border-maintenance { border-top-color: #dc3545 !important; }

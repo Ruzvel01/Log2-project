@@ -50,8 +50,9 @@
 
 
 
-<div class="table-card">
+<div class="table-card ">
     <h3>Drivers Status</h3>
+     <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
@@ -78,6 +79,7 @@
             @endforeach
         </tbody>
     </table>
+    </div>
 </div>
 
 

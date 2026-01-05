@@ -40,4 +40,10 @@ Route::resource('vehicleslist', VehicleRequestController::class)
     ->parameters(['vehicleslist' => 'vehicleRequest'])
     ->except(['index']);
 
-Route::get('/vehicles', [VehicleStatusController::class, 'index'])->name('vehiclestatus.index');
+Route::get('/vehicles', [VehicleManagementController::class, 'index'])->name('vehicles.index');
+Route::post('/vehicles', [VehicleManagementController::class, 'store'])->name('vehicles.store');
+Route::put('/vehicles/{id}', [VehicleManagementController::class, 'update'])->name('vehicles.update');
+Route::delete('/vehicles/{id}', [VehicleManagementController::class, 'destroy'])->name('vehicles.destroy');
+
+Route::post('/vehicles/{id}/submit-status', [VehicleManagementController::class, 'setAvailable'])->name('vehicles.setAvailable');
+Route::get('/vehicle-status', [VehicleManagementController::class, 'statusIndex'])->name('vehicles.status');

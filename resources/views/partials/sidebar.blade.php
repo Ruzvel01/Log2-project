@@ -12,11 +12,13 @@
 
 
       <ul class="sidebar-list">
+            <p class="module-title">Main</p>
         <li class="sidebar-list-item dash">
           <a href="{{route('dashboard')}}">
             <i class='bx bxs-dashboard '></i> Dashboard
           </a>
         </li>
+            <hr>
         <p class="module-title">Vehicle Management</p>
        <li class="sidebar-list-item module">
 
@@ -28,8 +30,7 @@
 
   <ul class="sidebar-submenu">
     <li><a href="{{route('vehicleslist.index')}}">Vehicle List</a></li>
-    <li><a href="{{route('vehiclestatus.index')}}">Vehicle Status</a></li>
-    <li><a href="#">Pendings</a></li>
+    <li><a href="{{ route('vehicles.status') }}">Vehicle Status</a></li>
   </ul>
 </li>
 
@@ -38,7 +39,21 @@
            <i class='bx bxs-checkbox-minus'></i>Availability
           </a>
         </li>
-        <p class="module-title">Vehicle Management</p>
+           <hr>
+        <p class="module-title">Dispatch & Reservation</p>
+        <li class="sidebar-list-item">
+          <a href="#">
+           <i class='bx bxs-checkbox-minus'></i>dispatch
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="#" >
+           <i class='bx bxs-checkbox-minus'></i>reservation
+          </a>
+        </li>
+
+            <hr>
+        <p class="module-title">Driver & Trip Performance</p>
         <li class="sidebar-list-item">
           <a href="#" >
          <i class='bx bxs-checkbox-minus'></i>performance
@@ -49,9 +64,16 @@
            <i class='bx bxs-checkbox-minus'></i>dispatch
           </a>
         </li>
+
+          <p class="module-title">Transport Cost Anaylist</p>
         <li class="sidebar-list-item">
           <a href="#" >
-           <i class='bx bxs-checkbox-minus'></i>reservation
+         <i class='bx bxs-checkbox-minus'></i>performance
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="#">
+           <i class='bx bxs-checkbox-minus'></i>dispatch
           </a>
         </li>
         <li class="sidebar-list-item">
