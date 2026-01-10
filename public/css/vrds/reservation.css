@@ -1,0 +1,60 @@
+.reservation-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        font-family: 'Inter', sans-serif;
+    }
+    .card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        margin-bottom: 2rem;
+        overflow: hidden;
+    }
+    .card-header {
+       background: linear-gradient(to right, #f0f4ff, #ffffff); 
+    border-radius: 12px;
+        padding: 1.25rem;
+    }
+    .card-header h4 {
+        margin-bottom: 0;
+        color: #333;
+        font-weight: 600;
+        font-size: 1.15rem;
+    }
+    .table {
+        margin-bottom: 0;
+    }
+    .table thead th {
+        background-color: #f8f9fa;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+        color: #6c757d;
+        border-top: none;
+        padding: 1rem;
+    }
+    .table tbody td {
+        vertical-align: middle;
+        padding: 1rem;
+        color: #495057;
+    }
+    .badge-status {
+        padding: 0.4em 0.8em;
+        border-radius: 6px;
+        font-size: 0.85rem;
+    }
+    .btn-reserve {
+        background-color: #0d6efd;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        transition: 0.3s;
+    }
+    .btn-reserve:hover {
+        background-color: #0b5ed7;
+        transform: translateY(-1px);
+    }
+    .alert {
+        border-radius: 10px;
+        border: none;
+    }

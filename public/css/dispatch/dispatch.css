@@ -1,0 +1,8 @@
+ .map-container { 
+        height: 400px; 
+        width: 100%; 
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+    /* Para hindi mag-overlap ang search results sa modal */
+    .leaflet-control-geocoder-form input { color: black !important; }

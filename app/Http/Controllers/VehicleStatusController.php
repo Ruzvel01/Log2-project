@@ -14,7 +14,7 @@ class VehicleStatusController extends Controller
         // Data para sa mga Card Boxes
         $stats = [
             'total' => $vehicles->count(),
-            'available' => $vehicles->where('status', 'Available')->count(),
+            'active' => $vehicles->where('status', 'Active')->count(),
             'on_trip' => $vehicles->where('status', 'On Trip')->count(),
             'maintenance' => $vehicles->where('status', 'Maintenance')->count(),
         ];

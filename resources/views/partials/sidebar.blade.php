@@ -3,12 +3,19 @@
 <aside id="sidebar">
       <div class="sidebar-title">
        <div class="sidebar-brand">
-  <img src="{{ asset('image/imarket1.png') }}" alt="Logo" class="sidebar-logo">
-  <p>Logistic - 2</p>
+    <img src="{{ asset('image/imarket1.png') }}" alt="Logo" class="sidebar-logo">
+
+    <div class="sidebar-brand-text">
+        <span class="brand-title">IMARKET</span>
+        <span class="brand-subtitle">Transport System</span>
+    </div>
+   
 </div>
+
 
         <span class="material-icons-outlined close-icon" onclick="closeSidebar()">close</span>
       </div>
+       
 
 
       <ul class="sidebar-list">
@@ -42,13 +49,14 @@
            <hr>
         <p class="module-title">Dispatch & Reservation</p>
         <li class="sidebar-list-item">
-          <a href="#">
-           <i class='bx bxs-checkbox-minus'></i>dispatch
-          </a>
+       <a href="{{ route('reservations.index') }}">
+   <i class='bx bxs-checkbox-minus'></i>Reservation
+</a>
+
         </li>
         <li class="sidebar-list-item">
-          <a href="#" >
-           <i class='bx bxs-checkbox-minus'></i>reservation
+          <a href="{{ route('dispatch.index') }}" >
+           <i class='bx bxs-checkbox-minus'></i>Dispatch
           </a>
         </li>
 
@@ -56,24 +64,29 @@
         <p class="module-title">Driver & Trip Performance</p>
         <li class="sidebar-list-item">
           <a href="#" >
-         <i class='bx bxs-checkbox-minus'></i>performance
+         <i class='bx bxs-checkbox-minus'></i>Driver Profile
           </a>
         </li>
         <li class="sidebar-list-item">
           <a href="#">
-           <i class='bx bxs-checkbox-minus'></i>dispatch
+           <i class='bx bxs-checkbox-minus'></i>Trip Performance
+          </a>
+        </li>
+         <li class="sidebar-list-item">
+          <a href="#">
+           <i class='bx bxs-checkbox-minus'></i>Reports
           </a>
         </li>
 
-          <p class="module-title">Transport Cost Anaylist</p>
+          <p class="module-title">Transport Cost Anaylist Optimaztion</p>
         <li class="sidebar-list-item">
           <a href="#" >
-         <i class='bx bxs-checkbox-minus'></i>performance
+         <i class='bx bxs-checkbox-minus'></i>Cost Analysis
           </a>
         </li>
         <li class="sidebar-list-item">
           <a href="#">
-           <i class='bx bxs-checkbox-minus'></i>dispatch
+           <i class='bx bxs-checkbox-minus'></i>Optimazation
           </a>
         </li>
         <li class="sidebar-list-item">

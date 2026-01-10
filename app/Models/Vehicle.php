@@ -22,4 +22,13 @@ class Vehicle extends Model
     'transmission',
     'registration_expiry',
     ];
+
+    public function reservations()
+{
+    return $this->hasMany(Reservation::class);
+}
+public function dispatch()
+{
+    return $this->hasOne(Dispatch::class);
+}
 }

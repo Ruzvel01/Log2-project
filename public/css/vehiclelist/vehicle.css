@@ -41,8 +41,15 @@ h4 {
 }
 
 .card-header {
-    border-bottom: 1px solid #f1f1f1;
-    font-weight: bold;
+ background: linear-gradient(to right, #f0f4ff, #ffffff); 
+    border-radius: 12px;
+    padding: 22px 28px;
+    margin-bottom: 25px;
+    border-left: 5px solid #7494ec; /* Sidebar color accent */
+    border-top: 1px solid #e5e7eb;
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .table {
@@ -103,9 +110,32 @@ h4 {
     box-shadow: 0 5px 15px rgba(39, 174, 96, 0.2);
 }
 
-.no-scroll-table {
-        overflow-x: hidden !important; /* Pinipigilan ang horizontal scroll */
-    }
+/* target specific header para sa monitoring table */
+.no-scroll-table thead {
+    background: linear-gradient(to right, #f0f4ff, #ffffff) !important;
+}
+
+.no-scroll-table thead th {
+    background: transparent !important; /* para lumitaw yung gradient ng thead */
+    color: #7494ec !important; /* sidebar blue color */
+    border-bottom: 2px solid #e5e7eb !important;
+}
+
+/* Siguraduhin na ang card-header text ay hindi puti para mabasa sa light gradient */
+.card-header h6 {
+    color: #2c3e50 !important;
+}
+
+/* Ayusin ang button sa loob ng header para hindi mawala sa light background */
+.card-header .btn-outline-light {
+    border-color: #7494ec !important;
+    color: #7494ec !important;
+}
+
+.card-header .btn-outline-light:hover {
+    background-color: #7494ec !important;
+    color: #ffffff !important;
+}
 
     .table-custom-flat {
         width: 100% !important;

@@ -14,13 +14,14 @@ i {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: 260px 1fr; 
-  grid-template-rows: 70px 1fr;
+  grid-template-columns: 260px 1fr;
+  /* Binago natin ang rows: sidebar sa kaliwa, main sa taas, footer sa baba */
+  grid-template-rows: 1fr auto; 
   grid-template-areas:
-    'sidebar header'
-    'sidebar main';
-  height: 100vh; /* Fixes the container to the screen height */
-  overflow: hidden; /* Prevents the whole page from scrolling */
+    'sidebar main'
+    'sidebar footer'; /* Ang sidebar ay abot hanggang baba, ang footer ay sa tabi nito */
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* ---------- HEADER ---------- */
@@ -73,14 +74,11 @@ i {
 
 .sidebar-brand {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* 👈 landscape */
   align-items: center;
   justify-content: center;
-  flex: 1;
-  text-align: center;
-  gap: 2px; /* smaller gap than before */
-  font-size: 16px;
-  font-weight: 700;
+  gap: 12px;
+  text-align: left;
 }
 .sidebar-brand p {
    margin:  0;          /* remove extra space */
@@ -89,19 +87,28 @@ i {
   font-size: 14px;     /* optional: smaller text */
 }
 .sidebar-logo {
-    max-width: 100px; /* adjust size as needed */
-    height: auto;
-    display: block;
-
+  width: 45px;
+  height: auto;
 }
 
 
 .sidebar-brand-text {
-    display: block;
-       
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
 }
 
-
+.brand-title {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #fff;
+}
+.brand-subtitle {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
 .sidebar-list {
     flex: 1; /* Kakainin nito lahat ng space sa gitna */
     overflow-y: auto; /* Dito lang lalabas ang scrollbar kung marami nang menu */
@@ -331,31 +338,56 @@ i {
     opacity: 0;
 }
 .main-container {
-  grid-area: main; 
+  grid-area: main;
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
-  overflow-y: auto; /* Dito mag-i-scroll ang content ng page mo */
-  height: calc(100vh - 70px); /* Bawas ang height ng header */
+  overflow-y: auto;
+  /* Hindi na natin kailangan ang height: 100vh dito dahil grid row na ang may hawak */
 }
   
-.breadcrumb {
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 20px;
-  color: #333;
+/* PAGE HEADER (replacement ng breadcrumb) */
+.page-header {
+    /* Gumagamit ng light version ng #7494ec */
+    background: linear-gradient(to right, #f0f4ff, #ffffff); 
+    border-radius: 12px;
+    padding: 22px 28px;
+    margin-bottom: 25px;
+    border-left: 5px solid #7494ec; /* Sidebar color accent */
+    border-top: 1px solid #e5e7eb;
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-.breadcrumb span {
-  color: #555555;
+.page-header h1 {
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0;
+    color: #2c3e50; /* Darker blue-grey */
+    letter-spacing: -0.5px;
 }
 
-.breadcrumb span + span::before {
-  content: " / ";
-  margin: 0 5px;
-  color: #999;
+.page-header p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #7494ec; /* Sidebar color para sa subtitle */
+    font-weight: 500;
 }
-
+.footer {
+  grid-area: footer;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  padding: 10px 25px;
+  display: flex;
+  align-items: center;
+  z-index: 5; /* Para laging nasa ibabaw */
+}
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 .close-icon {
   display: none !important;
   cursor: pointer;
@@ -363,16 +395,23 @@ i {
 /* Medium <= 992px */
 
 @media screen and (max-width: 992px) {
-  .grid-container {
+ .grid-container {
     grid-template-columns: 1fr;
-    grid-template-rows: 0.2fr 3fr;
+    grid-template-rows: 70px 1fr auto; /* Header, Main, Footer */
     grid-template-areas:
       'header'
-      'main';
+      'main'
+      'footer';
   }
-  .header{
+
+  .main-container {
+    height: auto; /* Hayaan ang grid rows ang mag-adjust */
+  }
+
+  .header {
     display: flex;
   }
+}
   
 /* ---------- MOBILE SIDEBAR ANIMATION ---------- */
 @media screen and (max-width: 992px) {
@@ -401,7 +440,7 @@ i {
   .sidebar-title > span {
     display: inline;
   }
-}
+
 
 /* Small <= 768px */
 

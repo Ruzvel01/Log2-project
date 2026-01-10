@@ -1,87 +1,82 @@
 @extends('layouts.log2home')
 
-@section('title', 'Dashboard')
-
 @section('content')
- @if(session('success'))
-<div class="toast toast-success show">
-    <span>{{ session('success') }}</span>
-</div>
-@endif
 <div class="dashboard-container">
-    <div class="dashboard-card">
-        <div class="card-icon user"><i class='bx bxs-user-circle'></i></div>
-        <h3>Drivers</h3>
-        <p id="users">0</p>
+    <div class="dashboard-card card-drivers">
+        <div class="card-info">
+            <h3>Total Drivers</h3>
+            <p>{{ $drivertables->count() }}</p>
+        </div>
+        <div class="card-icon"><i class='bx bxs-user-circle'></i></div>
     </div>
 
-    <div class="dashboard-card">
-        <div class="card-icon truck"><i class='bx bxs-truck'></i></div>
-        <h3>Total Vehicles</h3>
-        <p id="orders">0</p>
+    <div class="dashboard-card card-vehicles">
+        <div class="card-info">
+            <h3>Total Vehicles</h3>
+            <p id="orders">{{ $totalVehicles }}</p>
+        </div>
+        <div class="card-icon"><i class='bx bxs-truck'></i></div>
     </div>
 
-    <div class="dashboard-card">
-        <div class="card-icon sales"><i class='bx bx-trending-up'></i></div>
-        <h3>Reports</h3>
-        <p id="sales">₱0</p>
+    <div class="dashboard-card card-reports">
+        <div class="card-info">
+            <h3>Monthly Reports</h3>
+            <p>₱0</p>
+        </div>
+        <div class="card-icon"><i class='bx bx-trending-up'></i></div>
     </div>
 
-    <div class="dashboard-card">
-        <div class="card-icon report"><i class='bx bxs-report'></i></div>
-        <h3>Total Cost</h3>
-        <p id="pending">0</p>
-    </div>
-</div>
-
-
-  <!-- 📊 Charts Section -->
-<div class="dashboard-charts">
-  <div class="chart-card">
-    <h3>Cost Anaylist</h3>
-    <canvas id="salesChart"></canvas>
-  </div>
-
-  <div class="chart-card">
-    <h3>Heavy and Light Materials</h3>
-    <canvas id="ordersChart"></canvas>
-  </div>
-</div>
-
-
-
-<div class="table-card ">
-    <h3>Drivers Status</h3>
-     <div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Driver ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($drivertables  as $Drivertable)
-            <tr>
-                <td>#{{ $Drivertable->id }}</td>
-                <td>{{ $Drivertable->name }}</td>
-                <td>{{ $Drivertable->email }}</td>
-                <td>
-                    @if($Drivertable->is_active)
-                        <span style="color:green;font-weight:bold;">Active</span>
-                    @else
-                        <span style="color:red;font-weight:bold;">Inactive</span>
-                    @endif
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="dashboard-card card-cost">
+        <div class="card-info">
+            <h3>Overall Cost</h3>
+            <p>₱0</p>
+        </div>
+        <div class="card-icon"><i class='bx bxs-report'></i></div>
     </div>
 </div>
 
+<div class="main-dashboard-grid">
+    <div class="charts-section">
+        <div class="chart-card shadow-sm">
+            <h3>Cost Analysis</h3>
+            <canvas id="salesChart"></canvas>
+        </div>
+        <div class="chart-card shadow-sm">
+            <h3>Material Distribution</h3>
+            <canvas id="ordersChart"></canvas>
+        </div>
+    </div>
 
+    <div class="driver-status-section shadow-sm">
+        <div class="section-header">
+            <h3>Driver Status</h3>
+            <a href="#" class="view-all-link">View All</a>
+        </div>
+        
+        <div class="driver-grid">
+            @forelse($drivertables as $Drivertable)
+            <div class="driver-item-card">
+                <div class="driver-avatar-wrapper">
+                    <div class="driver-avatar-circle">
+                        <i class='bx bxs-user'></i>
+                    </div>
+                    <span class="status-dot {{ $Drivertable->is_active ? 'online' : 'offline' }}"></span>
+                </div>
+                <div class="driver-details">
+                    <h4>{{ $Drivertable->name }}</h4>
+                    <small>ID: #{{ $Drivertable->id }}</small>
+                </div>
+                <div class="status-badge {{ $Drivertable->is_active ? 'active' : 'idle' }}">
+                    {{ $Drivertable->is_active ? 'Active' : 'Idle' }}
+                </div>
+            </div>
+            @empty
+            <div class="no-drivers">
+                <i class='bx bx-info-circle'></i>
+                <p>No drivers found.</p>
+            </div>
+            @endforelse
+        </div>
+    </div>
+</div>
 @endsection
-

@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-md-6 text-end">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerVehicleModal">
-                        + Register Vehicle
+                        + Add
                     </button>
                 </div>
             </div>
@@ -75,14 +75,15 @@
                                 <td>{{ $vehicle->plate_no }}</td>
                                 <td>{{ $vehicle->model }}</td>
                                 <td>{{ $vehicle->type }}</td>
-                                <td>
-                @if($vehicle->status == 'Registered')
-                    <span class="badge bg-secondary">Registered</span>
-                @else
-                    {{-- Kapag Available, In-Use, o Maintenance na ang status sa DB, "Submitted" ang lalabas dito --}}
-                    <span class="badge bg-info text-dark">Submitted</span>
-                @endif
-            </td>
+       <td>
+    @if($vehicle->monitoring_status == 'Not-Submitted')
+        <span class="badge bg-secondary">Registered</span>
+    @elseif($vehicle->monitoring_status == 'Submitted')
+        <span class="badge bg-info text-dark">Submitted</span>
+    @else
+        <span class="badge bg-success">{{ $vehicle->status }}</span>
+    @endif
+</td>
                                 <td>{{ $vehicle->created_at->format('M d, Y') }}</td>
                                 <td>
                                     <div class="d-flex gap-1">
@@ -144,9 +145,9 @@
                             <td class="ps-4 fw-bold text-dark">{{ $mv->plate_no }}</td>
                             <td class="text-secondary">{{ $mv->model }}</td>
                             <td>
-                                <span class="badge-outline-flat {{ $statusStyle }}">
-                                    {{ $mv->status }}
-                                </span>
+                                <span class="badge bg-info text-dark">
+            Submitted
+        </span>
                             </td>
                             <td class="text-center">
                                 <button class="btn btn-quickview" data-bs-toggle="modal" data-bs-target="#viewModal{{ $mv->id }}">
@@ -179,12 +180,9 @@
                     <input type="text" name="vehicle_model" class="form-control" placeholder="Vehicle Model" value="{{ request('vehicle_model') }}">
                 </div>
                 <div class="col-md-3">
-                    <select name="vehicle_type" class="form-select">
-                        <option value="">All Types</option>
-                        <option value="Truck">Truck</option>
-                        <option value="Van">Van</option>
-                        <option value="Motorcycle">Motorcycle</option>
-                    </select>
+                   <select name="type" class="form-select" required>
+    <option value="Van">Van</option>
+</select>
                 </div>
                 <div class="col-md-3">
                     <select name="status" class="form-select">
@@ -298,11 +296,10 @@
 
                     <div class="mb-3">
                         <label class="form-label">Vehicle Type</label>
-                        <select name="type" class="form-select" required>
-                            <option value="Van">L300</option>
-                            <option value="Sedan">Sedan</option>
-                            <option value="SUV">SUV</option>
-                        </select>
+                       <select name="type" class="form-select" required>
+    <option value="Van">Van</option>
+</select>
+
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Initial Status</label>

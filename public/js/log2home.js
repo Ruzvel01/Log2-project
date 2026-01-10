@@ -63,35 +63,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const currentUrl = window.location.href;
-    const breadcrumb = document.getElementById('breadcrumb');
 
-    // 1. Awtomatikong buksan ang Sidebar Dropdown base sa URL
-    document.querySelectorAll('.sidebar-submenu a').forEach(link => {
+    // All links
+    document.querySelectorAll('.sidebar-list a').forEach(link => {
         if (currentUrl.includes(link.getAttribute('href'))) {
+            // Active styling
+            link.classList.add('active');
+
+            // If inside submenu, open it
             const submenu = link.closest('.sidebar-submenu');
-            const parentToggle = submenu.previousElementSibling;
+            if (submenu) {
+                submenu.style.display = 'block';
+                const parentToggle = submenu.previousElementSibling;
+                parentToggle.classList.add('active');
+            }
 
-            // Panatilihing nakabukas ang menu
-            submenu.style.display = 'block';
-            parentToggle.classList.add('active');
-            link.classList.add('active'); // highlight ang current page link
+            // Update page header
+            const pageTitle = document.getElementById('pageTitle');
+            const pageSubtitle = document.getElementById('pageSubtitle');
 
-            // 2. Ayusin ang Breadcrumbs base sa active link
-            if (breadcrumb) {
-                const parentText = parentToggle.textContent.trim();
+            if (pageTitle && pageSubtitle) {
                 const itemText = link.textContent.trim();
-                breadcrumb.innerHTML = `
-                    <span>Dashboard</span>
-                    <i class='bx bx-chevron-right'></i>
-                    <span>${parentText}</span>
-                    <i class='bx bx-chevron-right'></i>
-                    <span>${itemText}</span>
-                `;
+
+                // Get parent module or section name
+                const moduleTitle = link.closest('.sidebar-list').querySelector('p.module-title')?.textContent.trim() || 'Dashboard';
+
+                pageTitle.textContent = itemText;
+                pageSubtitle.textContent = `Manage ${itemText.toLowerCase()} under ${moduleTitle.toLowerCase()}`;
             }
         }
     });
-
-    // 3. Siguraduhin na ang Filter form ay nagpapasa ng tab preference (Optional)
-    // Para mas accurate, pwede mong dagdagan ng hidden input ang filter form mo:
-    // <input type="hidden" name="active_tab" value="requests">
 });
+
+
+
+function initMap(id) {
+    const map = new google.maps.Map(document.getElementById('map'+id), {
+        zoom: 10,
+        center: { lat: 14.5995, lng: 120.9842 }
+    });
+
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(map);
+
+    // call directionsService.route(...)
+}
