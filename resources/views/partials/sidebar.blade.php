@@ -20,11 +20,13 @@
 
       <ul class="sidebar-list">
             <p class="module-title">Main</p>
-        <li class="sidebar-list-item dash">
-          <a href="{{route('dashboard')}}">
-            <i class='bx bxs-dashboard '></i> Dashboard
-          </a>
-        </li>
+      <li class="sidebar-list-item dash">
+  <a href="{{ route('dashboard') }}"
+     data-title="Dashboard"
+     data-subtitle="Overview of system activity">
+    <i class='bx bxs-dashboard'></i> Dashboard
+  </a>
+</li>
             <hr>
         <p class="module-title">Vehicle Management</p>
        <li class="sidebar-list-item module">
@@ -36,8 +38,16 @@
   </a>
 
   <ul class="sidebar-submenu">
-    <li><a href="{{route('vehicleslist.index')}}">Vehicle List</a></li>
-    <li><a href="{{ route('vehicles.status') }}">Vehicle Status</a></li>
+    <li>  <a href="{{ route('vehicleslist.index') }}"
+     data-title="Vehicle List"
+     data-subtitle="Manage all registered vehicles">
+    Vehicle List
+  </a></li>
+    <li> <a href="{{ route('vehicles.status') }}"
+     data-title="Vehicle Status"
+     data-subtitle="Monitor active, in-use, and maintenance vehicles">
+    Vehicle Status
+  </a></li>
   </ul>
 </li>
 
@@ -49,15 +59,19 @@
            <hr>
         <p class="module-title">Dispatch & Reservation</p>
         <li class="sidebar-list-item">
-       <a href="{{ route('reservations.index') }}">
-   <i class='bx bxs-checkbox-minus'></i>Reservation
-</a>
+       <a href="{{ route('reservations.index') }}"
+     data-title="Reservations"
+     data-subtitle="Manage vehicle reservations and schedules">
+    <i class='bx bxs-checkbox-minus'></i> Reservation
+  </a>
 
         </li>
         <li class="sidebar-list-item">
-          <a href="{{ route('dispatch.index') }}" >
-           <i class='bx bxs-checkbox-minus'></i>Dispatch
-          </a>
+          <a href="{{ route('dispatch.index') }}"
+     data-title="Dispatch"
+     data-subtitle="Assign and monitor dispatched vehicles">
+    <i class='bx bxs-checkbox-minus'></i> Dispatch
+  </a>
         </li>
 
             <hr>
@@ -89,24 +103,32 @@
            <i class='bx bxs-checkbox-minus'></i>Optimazation
           </a>
         </li>
-        <li class="sidebar-list-item">
-          <a href="#" class="dropdown-toggle">
-            <i class='bx bx-cog'></i> Settings
-            <i class='bx bx-chevron-right arrow'></i>
-          </a>
-          <ul class="sidebar-submenu">
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Security</a></li>
-            <li><a href="#">Notifications</a></li>
-          </ul>
+           <li class="sidebar-list-item">
+           <a href="{{ route('settings.show') }}"
+     data-title="Settings"
+     data-subtitle="Manage system and account settings">
+    <i class='bx bx-cog'></i> Settings
+  </a>
         </li>
+      
 
       </ul>
      <div class="sidebar-profile">
   <div class="profile-box">
     <div class="profile-avatar">
-      <i class="bx bx-user"></i>
-    </div>
+    @auth
+        @if(Auth::user()->profile_picture)
+            <img 
+                src="{{ asset('storage/profile/' . Auth::user()->profile_picture) }}" 
+                alt="Profile Avatar"
+                class="avatar-img">
+        @else
+            <i class="bx bx-user"></i>
+        @endif
+    @else
+        <i class="bx bx-user"></i>
+    @endauth
+</div>
 
     <div class="profile-info">
       <!-- Display the authenticated user's name -->
@@ -118,9 +140,9 @@
     @auth
     <form action="{{ route('logout') }}" method="POST" style="margin:0;">
       @csrf
-      <button type="submit" class="profile-action">
-        <i class="bx bx-log-out"></i>
-      </button>
+     <button type="submit" class="profile-action" onclick="return confirm('Are you sure you want to logout?')">
+    <i class="bx bx-log-out"></i>
+</button>
     </form>
     @endauth
   </div>

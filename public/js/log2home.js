@@ -64,13 +64,14 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const currentUrl = window.location.href;
 
-    // All links
-    document.querySelectorAll('.sidebar-list a').forEach(link => {
-        if (currentUrl.includes(link.getAttribute('href'))) {
-            // Active styling
+    // Update page header and active links
+    document.querySelectorAll('.sidebar-list a, .sidebar-submenu a').forEach(link => {
+        const href = link.getAttribute('href');
+
+        if (currentUrl.includes(href)) {
             link.classList.add('active');
 
-            // If inside submenu, open it
+            // Open parent submenu if exists
             const submenu = link.closest('.sidebar-submenu');
             if (submenu) {
                 submenu.style.display = 'block';
@@ -83,17 +84,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const pageSubtitle = document.getElementById('pageSubtitle');
 
             if (pageTitle && pageSubtitle) {
-                const itemText = link.textContent.trim();
+                const title = link.dataset.title || link.textContent.trim();
+                const subtitle = link.dataset.subtitle || `Manage ${title.toLowerCase()}`;
 
-                // Get parent module or section name
-                const moduleTitle = link.closest('.sidebar-list').querySelector('p.module-title')?.textContent.trim() || 'Dashboard';
-
-                pageTitle.textContent = itemText;
-                pageSubtitle.textContent = `Manage ${itemText.toLowerCase()} under ${moduleTitle.toLowerCase()}`;
+                pageTitle.textContent = title;
+                pageSubtitle.textContent = subtitle;
             }
         }
     });
 });
+
 
 
 
@@ -109,3 +109,5 @@ function initMap(id) {
 
     // call directionsService.route(...)
 }
+
+

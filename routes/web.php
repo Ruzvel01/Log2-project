@@ -26,6 +26,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // --- PROTECTED ROUTES ---
 Route::middleware(['auth'])->group(function () {
+
+//Settings
+  Route::get('/settings', [AuthController::class, 'showSettings'])->name('settings.show');
+    Route::post('/settings/profile', [AuthController::class, 'updateProfile'])->name('settings.profile');
+    Route::post('/settings/password', [AuthController::class, 'updatePassword'])->name('settings.password');
+
     
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

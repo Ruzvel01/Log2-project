@@ -278,3 +278,44 @@ h4 {
     }
 }
 
+.table-custom {
+        border-radius: 10px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    
+    .table-custom thead {
+        background-color: #f8f9fa;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .table-custom thead th {
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: #6c757d;
+        border: none;
+        padding: 15px;
+    }
+
+    .table-custom tbody td {
+        padding: 15px;
+        border-bottom: 1px solid #f1f1f1;
+        font-size: 0.9rem;
+    }
+
+    /* Status Badge Styling */
+    .badge-soft-success { background-color: #e1f6eb; color: #28a745; }
+    .badge-soft-info { background-color: #0a89d8; color: #ffffff; }
+    .badge-soft-secondary { background-color: #98a3b4; color: #6c757d; }
+    .badge-soft-warning { background-color: #fff3cd; color: #856404; }
+
+    /* Action Buttons Hover */
+    .btn-action {
+        transition: all 0.2s;
+        border-radius: 6px;
+    }
+    .btn-action:hover {
+        transform: translateY(-2px);
+    }

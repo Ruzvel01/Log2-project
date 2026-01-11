@@ -55,58 +55,81 @@
             </div>
         </div>
 
-        <div class="card-body">
-            <h6 class="fw-bold mb-3 text-secondary">Registered Vehicles Master List</h6>
-            <div class="table-responsive">
-                <table class="table table-bordered align-middle">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Plate No</th>
-                            <th>Model</th>
-                            <th>Type</th>
-                            <th>Status</th>
-                            <th>Date Registered</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($vehicles as $vehicle)
-                            <tr>
-                                <td>{{ $vehicle->plate_no }}</td>
-                                <td>{{ $vehicle->model }}</td>
-                                <td>{{ $vehicle->type }}</td>
-       <td>
-    @if($vehicle->monitoring_status == 'Not-Submitted')
-        <span class="badge bg-secondary">Registered</span>
-    @elseif($vehicle->monitoring_status == 'Submitted')
-        <span class="badge bg-info text-dark">Submitted</span>
-    @else
-        <span class="badge bg-success">{{ $vehicle->status }}</span>
-    @endif
-</td>
-                                <td>{{ $vehicle->created_at->format('M d, Y') }}</td>
-                                <td>
-                                    <div class="d-flex gap-1">
-                                        <button class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#viewModal{{ $vehicle->id }}">
-                                            <i class="bi bi-eye"></i> View
-                                        </button>
-                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $vehicle->id }}">
-                                            <i class="bi bi-pencil"></i> Edit
-                                        </button>
-                                        <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
-                                            @csrf @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Delete</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr><td colspan="6" class="text-center">No registered vehicles found.</td></tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
+       <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h6 class="fw-bold text-dark m-0">Registered Vehicles Master List</h6>
+        <span class="badge bg-light text-dark border">{{ count($vehicles) }} Total Vehicles</span>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-custom align-middle">
+            <thead>
+                <tr>
+                    <th>Vehicle Details</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Date Registered</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($vehicles as $vehicle)
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm me-3 bg-light rounded d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="bi bi-car-front-fill text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold text-dark">{{ $vehicle->plate_no }}</div>
+                                    <small class="text-muted">{{ $vehicle->model }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="text-secondary small fw-bold">{{ $vehicle->type }}</span>
+                        </td>
+                        <td>
+                            @if($vehicle->monitoring_status == 'Not-Submitted')
+                                <span class="badge badge-soft-secondary">Registered</span>
+                            @elseif($vehicle->monitoring_status == 'Submitted')
+                                <span class="badge badge-soft-info">Submitted</span>
+                            @else
+                                <span class="badge badge-soft-success">{{ $vehicle->status }}</span>
+                            @endif
+                        </td>
+                        <td class="text-muted small">
+                            {{ $vehicle->created_at->format('M d, Y') }}
+                        </td>
+                        <td>
+                            <div class="d-flex gap-2 justify-content-end">
+                                <button class="btn btn-sm btn-light btn-action" title="View" data-bs-toggle="modal" data-bs-target="#viewModal{{ $vehicle->id }}">
+                                   <i class='bx bx-show'></i>
+                                </button>
+                                <button class="btn btn-sm btn-light btn-action" title="Edit" data-bs-toggle="modal" data-bs-target="#editModal{{ $vehicle->id }}">
+                                    <i class='bx bx-edit' ></i>
+                                </button>
+                                <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST" onsubmit="return confirm('Are You Sure?')">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-light btn-action" title="Delete">
+                                        <i class='bx bx-trash'></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5" class="text-center py-5">
+                          <img src="{{ asset('image/van.png') }}" width="50" class="mb-3 opacity-50">
+                            <p class="text-muted">No registered vehicles found.</p>
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
     </div>
 
     {{-- ETO YUNG PAGITAN --}}

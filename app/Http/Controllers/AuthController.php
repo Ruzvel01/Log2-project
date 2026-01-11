@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\LoginOtpMail;
 use Carbon\Carbon;
 use App\Models\LoginOtp;
+use Illuminate\Support\Facades\Storage;
 
 
 class AuthController extends Controller
@@ -134,5 +135,64 @@ public function resendOtp(Request $request)
     Mail::to($user->email)->send(new \App\Mail\LoginOtpMail($otp, $user->username));
 
     return redirect()->back()->with('success', 'A new OTP has been sent to your email.');
+}
+
+
+
+public function showSettings()
+{
+    
+    $user = Auth::user();
+    return view('auth.settings', compact('user'));
+}
+
+public function updateProfile(Request $request)
+{
+    $user = Auth::user();
+
+    $request->validate([
+        'username' => 'required|string|unique:users,username,' . $user->id,
+        'email' => 'required|email|unique:users,email,' . $user->id,
+        'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+    ]);
+
+    if ($request->hasFile('profile_picture')) {
+        // Delete old picture
+        if ($user->profile_picture && Storage::exists('public/profile/' . $user->profile_picture)) {
+            Storage::delete('public/profile/' . $user->profile_picture);
+        }
+
+        $image = $request->file('profile_picture');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->storeAs('profile', $imageName, 'public');
+
+
+        $user->profile_picture = $imageName;
+    }
+
+    $user->username = $request->username;
+    $user->email = $request->email;
+    $user->save();
+
+    return redirect()->back()->with('success', 'Profile updated successfully.');
+}
+
+public function updatePassword(Request $request)
+{
+    $request->validate([
+        'current_password' => 'required',
+        'password' => 'required|string|min:6|confirmed',
+    ]);
+
+    $user = Auth::user();
+
+    if (!Hash::check($request->current_password, $user->password)) {
+        return redirect()->back()->with('error', 'Current password is incorrect.');
+    }
+
+    $user->password = Hash::make($request->password);
+    $user->save();
+
+    return redirect()->back()->with('success', 'Password updated successfully.');
 }
 }
